@@ -67,6 +67,7 @@ const Integrations = () => {
   return (
     <section 
       ref={sectionRef} 
+      id="skills"
       className="relative bg-white py-16 md:py-24 overflow-hidden font-sans"
     >
       <div className="relative z-10 mx-auto flex flex-col items-center">
@@ -80,7 +81,7 @@ const Integrations = () => {
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
           </span>
           Integrations
         </motion.div>
@@ -93,11 +94,11 @@ const Integrations = () => {
           className="text-[clamp(2rem,4vw,3.5rem)] font-medium text-center text-[#111] leading-[1.15] mb-12 max-w-4xl px-6"
         >
           Crafting scalable digital experiences with{" "}
-          <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#3b82f6] mx-2 align-middle shadow-lg">
+          <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#7C3AED] mx-2 align-middle shadow-lg">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
           </span>
           modern and{" "}
-          <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#c0ff00] mx-2 align-middle shadow-lg">
+          <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#FF4D00] mx-2 align-middle shadow-lg">
              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </span>
           <span className="text-[#888]">powerful tools</span>

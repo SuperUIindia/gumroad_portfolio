@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CONTACT_CONFIG } from "../config/contactConfig";
 
 const ContactForm = ({ onSubmitSuccess }) => {
   const [result, setResult] = useState("");
@@ -7,33 +8,32 @@ const ContactForm = ({ onSubmitSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setResult("Sending....");
-    
-    const formData = new FormData(e.target);
-    formData.append("access_key", "529093fb-c73b-4b23-a1c0-");
+    setResult("");
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", CONTACT_CONFIG.accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
       if (data.success) {
-        setResult("Form Submitted Successfully!");
+        setResult("Message sent successfully!");
         e.target.reset();
         if (onSubmitSuccess) {
-          // Delay closure slightly so user can read success message
           setTimeout(() => {
             onSubmitSuccess();
             setResult("");
           }, 1500);
         }
       } else {
-        setResult("Error submitting form. Please try again.");
+        setResult("Unable to send. Please try again.");
       }
-    } catch (error) {
-      setResult("Error submitting form. Please try again.");
+    } catch {
+      setResult("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -47,7 +47,7 @@ const ContactForm = ({ onSubmitSuccess }) => {
           type="text"
           name="name"
           placeholder="John Doe"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         />
       </div>
@@ -58,7 +58,7 @@ const ContactForm = ({ onSubmitSuccess }) => {
           type="email"
           name="email"
           placeholder="john@example.com"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         />
       </div>
@@ -69,7 +69,7 @@ const ContactForm = ({ onSubmitSuccess }) => {
           name="message"
           placeholder="Tell me about your project, timeline, and budget..."
           rows="4"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all resize-none"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all resize-none"
           required
         ></textarea>
       </div>
@@ -77,7 +77,7 @@ const ContactForm = ({ onSubmitSuccess }) => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-2 w-full bg-[#111] hover:bg-[#c0ff00] text-white hover:text-black font-bold py-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-2 w-full bg-[#111] hover:bg-[#FF4D00] text-white hover:text-black font-bold py-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
         {!isSubmitting && (

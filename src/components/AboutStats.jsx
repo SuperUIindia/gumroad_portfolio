@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const AboutStats = () => {
   return (
-    <section className="relative z-20 bg-[#f8f9fa] text-[#111] py-16 min-[480px]:py-24 md:py-32 px-6 md:px-12 lg:px-20 overflow-hidden font-sans rounded-b-[3rem]">
+    <section id="about" className="relative z-20 bg-[#f8f9fa] text-[#111] py-16 min-[480px]:py-24 md:py-32 px-6 md:px-12 lg:px-20 overflow-hidden font-sans rounded-b-[3rem]">
       <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
         
         {/* Top Header Section */}
@@ -23,12 +23,12 @@ const AboutStats = () => {
               className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.1] tracking-tight"
             >
               A global consulting partner dedicated to building{" "}
-              <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#3b82f6] mx-2 align-middle">
+              <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#7C3AED] mx-2 align-middle">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/></svg>
               </span>
               smarter and{" "}
-              <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#c0ff00] mx-2 align-middle">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span className="inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#FF4D00]  mx-2 align-middle">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </span>
               <span className="text-[#888]">more adaptive</span>
             </motion.h2>
@@ -68,10 +68,10 @@ const AboutStats = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-[#c0ff00] rounded-[2rem] p-8 flex flex-col justify-between aspect-square"
+            className="bg-[#FF4D00] text-white rounded-[2rem] p-8 flex flex-col justify-between aspect-square"
           >
             <div>
-              <p className="text-sm font-medium text-[#333] mb-4">Commitment to measurable</p>
+              <p className="text-sm font-medium text-white mb-4">Commitment to measurable</p>
               <h3 className="text-5xl font-medium tracking-tight">100%</h3>
             </div>
             <p className="text-sm font-medium leading-relaxed">
@@ -110,13 +110,13 @@ const AboutStats = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="bg-[#e9ecef] rounded-[2rem] p-8 flex flex-col justify-between aspect-square"
+            className="bg-[#7C3AED] text-white rounded-[2rem] p-8 flex flex-col justify-between aspect-square"
           >
             <div>
-              <p className="text-sm font-medium text-[#555] mb-4">Data Points</p>
-              <h3 className="text-5xl font-medium tracking-tight">520k+</h3>
+              <p className="text-sm font-medium text-white mb-4">Data Points</p>
+              <h3 className="text-5xl font-medium text-white tracking-tight">520k+</h3>
             </div>
-            <p className="text-sm font-medium leading-relaxed text-[#555]">
+            <p className="text-sm font-medium leading-relaxed text-text-white">
               Analyzed monthly to power smarter business strategies.
             </p>
           </motion.div>

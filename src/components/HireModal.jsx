@@ -36,7 +36,7 @@ const HireModal = ({ isOpen, onClose }) => {
               </button>
 
               <div className="mb-6 flex-shrink-0">
-                <span className="inline-block px-3 py-1 bg-[#c0ff00]/20 text-[#8aab00] font-bold text-xs rounded-full mb-3 tracking-wider uppercase">
+                <span className="inline-block px-3 py-1 bg-[#FF4D00]/20 text-[#8aab00] font-bold text-xs rounded-full mb-3 tracking-wider uppercase">
                   Let's Build
                 </span>
                 <h2 className="text-3xl font-bold tracking-tight text-[#111] mb-1">

@@ -10,12 +10,13 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHireModalOpen, setIsHireModalOpen] = useState(false);
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'AboutUs', href: '#' },
-    { name: 'Skills', href: '#' },
-    { name: 'Services', href: '#' },
-    { name: 'Projects', href: '#', hasDropdown: true },
-    { name: 'Contact', href: '#' },
+    { name: 'Home', href: '#home' },
+    { name: 'AboutUs', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Certificates', href: '#certificates' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -78,7 +79,7 @@ const Navbar = () => {
         <div className="hidden lg:block">
           <button 
             onClick={() => setIsHireModalOpen(true)}
-            className="bg-primary text-white px-5 py-2.5 rounded-xl font-medium text-[15px] hover:bg-[#035f45] transition-colors shadow-sm"
+            className="bg-[#ff4d00] text-white px-5 py-2.5 rounded-xl font-medium text-[15px] hover:bg-[#7C3AED] transition-colors shadow-sm cursor-pointer"
           >
             Hire Me Know
           </button>

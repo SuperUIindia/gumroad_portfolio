@@ -28,12 +28,13 @@ const defaultProps = {
   linkDelayOffset: 0.03,
   menuFont: { fontFamily: "Inter", fontWeight: 500 },
   navLinks: [
-    { title: "Home", url: "#" },
-    { title: "AboutUs", url: "#" },
-    { title: "Skills", url: "#" },
-    { title: "Services", url: "#" },
-    { title: "Projects", url: "#" },
-    { title: "Contact", url: "#" },
+    { title: "Home", url: "#home" },
+    { title: "AboutUs", url: "#about" },
+    { title: "Skills", url: "#skills" },
+    { title: "Projects", url: "#projects" },
+    { title: "Certificates", url: "#certificates" },
+    { title: "Experience", url: "#experience" },
+    { title: "Contact", url: "#contact" },
   ],
   footerLinksData: [
     { title: "Facebook", url: "#" },
@@ -406,9 +407,9 @@ export default function MorphedMenu(props) {
                         href={link.url}
                         role="menuitem"
                         onClick={(e) => {
+                          setClick(false);
                           if (link.title === "Contact") {
                             e.preventDefault();
-                            setClick(false);
                             if (props.onContactClick) {
                               props.onContactClick();
                             }

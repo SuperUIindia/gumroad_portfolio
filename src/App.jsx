@@ -5,7 +5,10 @@ import Hero from './components/Hero';
 import AboutStats from './components/AboutStats';
 import Integrations from './components/Integrations';
 import Projects from './components/Projects';
+import CertificatesTraining from './components/CertificatesTraining';
+import Experience from './components/Experience';
 import Testimonials from './components/Testimonials';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import StaggeredPreloader from './components/Preloader';
 
@@ -30,7 +33,10 @@ function App() {
               <AboutStats />
               <Integrations />
               <Projects />
+              <CertificatesTraining />
+              <Experience />
               <Testimonials />
+              <ContactSection />
             </main>
             <Footer />
           </motion.div>

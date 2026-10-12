@@ -22,9 +22,62 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  section {
+    scroll-margin-top: 1.5rem;
+  }
   body {
     @apply bg-background text-slate-800 font-sans antialiased;
   }
+
+  /* Universal pointer cursor for buttons and interactive elements */
+  button,
+  [role="button"],
+  a,
+  select,
+  summary,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  label[for],
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
+
+  /* Disabled state */
+  button:disabled,
+  [role="button"][aria-disabled="true"],
+  input:disabled,
+  select:disabled,
+  .disabled {
+    cursor: not-allowed !important;
+  }
+}
+
+/* Fallback top-level selector to ensure priority across any CSS reset */
+button,
+[role="button"],
+a,
+select,
+summary,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+label[for] {
+  cursor: pointer;
+}
+
+button:disabled,
+[role="button"][aria-disabled="true"],
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
 }
 
 @layer utilities {
@@ -32,3 +85,4 @@
     @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-xl;
   }
 }
+

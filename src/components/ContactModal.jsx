@@ -1,33 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const KEY_1 = import.meta.env.VITE_WEB3FORMS_KEY_1 || "";
-
-const getCurrentMonthKey = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth() + 1}`;
-};
-
-const checkAndResetMonth = () => {
-  const currentMonth = getCurrentMonthKey();
-  const storedMonth = localStorage.getItem("web3forms_month");
-
-  if (storedMonth !== currentMonth) {
-    localStorage.setItem("web3forms_month", currentMonth);
-    localStorage.setItem("web3forms_key1_count", "0");
-    localStorage.setItem("web3forms_key2_count", "0");
-  }
-};
-
-const getKey1Count = () => {
-  checkAndResetMonth();
-  return parseInt(localStorage.getItem("web3forms_key1_count") || "0", 10);
-};
-
-const incrementKey1Count = () => {
-  const count = getKey1Count();
-  localStorage.setItem("web3forms_key1_count", (count + 1).toString());
-};
+import { CONTACT_CONFIG } from "../config/contactConfig";
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [result, setResult] = useState("");
@@ -36,38 +9,30 @@ const ContactModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setResult("Sending....");
+    setResult("");
 
-    const currentCount = getKey1Count();
-    if (currentCount >= 240) {
-      setResult("Please call to Akhil Thadaka: 9121751697");
-      setIsSubmitting(false);
-      return;
-    }
-
-    const formData = new FormData(e.target);
-    formData.append("access_key", KEY_1);
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", CONTACT_CONFIG.accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
       if (data.success) {
-        incrementKey1Count();
-        setResult("Form Submitted Successfully!");
+        setResult("Message sent successfully!");
         e.target.reset();
         setTimeout(() => {
           onClose();
           setResult("");
         }, 1500);
       } else {
-        setResult("Error submitting form. Please try again.");
+        setResult("Unable to send. Please try again.");
       }
-    } catch (error) {
-      setResult("Error submitting form. Please try again.");
+    } catch {
+      setResult("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -106,7 +71,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               </button>
 
               <div className="mb-8">
-                <span className="inline-block px-3 py-1 bg-[#c0ff00]/20 text-[#8aab00] font-bold text-xs rounded-full mb-4 tracking-wider uppercase">
+                <span className="inline-block px-3 py-1 bg-[#FF4D00]/20 text-[#8aab00] font-bold text-xs rounded-full mb-4 tracking-wider uppercase">
                   Hire Me
                 </span>
                 <h2 className="text-3xl font-bold tracking-tight text-[#111] mb-2">
@@ -124,7 +89,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                     type="text"
                     name="name"
                     placeholder="John Doe"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
                     required
                   />
                 </div>
@@ -135,7 +100,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                     type="email"
                     name="email"
                     placeholder="john@example.com"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
                     required
                   />
                 </div>
@@ -146,7 +111,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                     name="message"
                     placeholder="Tell me about your project, timeline, and budget..."
                     rows="4"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all resize-none"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all resize-none"
                     required
                   ></textarea>
                 </div>
@@ -154,7 +119,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-2 w-full bg-[#111] hover:bg-[#c0ff00] text-white hover:text-black font-bold py-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="mt-2 w-full bg-[#111] hover:bg-[#FF4D00] text-white hover:text-black font-bold py-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   {!isSubmitting && (

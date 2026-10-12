@@ -1,32 +1,5 @@
 import React, { useState } from "react";
-
-const KEY_2 = import.meta.env.VITE_WEB3FORMS_KEY_2 || "";
-
-const getCurrentMonthKey = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth() + 1}`;
-};
-
-const checkAndResetMonth = () => {
-  const currentMonth = getCurrentMonthKey();
-  const storedMonth = localStorage.getItem("web3forms_month");
-
-  if (storedMonth !== currentMonth) {
-    localStorage.setItem("web3forms_month", currentMonth);
-    localStorage.setItem("web3forms_key1_count", "0");
-    localStorage.setItem("web3forms_key2_count", "0");
-  }
-};
-
-const getKey2Count = () => {
-  checkAndResetMonth();
-  return parseInt(localStorage.getItem("web3forms_key2_count") || "0", 10);
-};
-
-const incrementKey2Count = () => {
-  const count = getKey2Count();
-  localStorage.setItem("web3forms_key2_count", (count + 1).toString());
-};
+import { CONTACT_CONFIG } from "../config/contactConfig";
 
 const HireForm = ({ onSubmitSuccess }) => {
   const [result, setResult] = useState("");
@@ -35,28 +8,20 @@ const HireForm = ({ onSubmitSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setResult("Sending....");
+    setResult("");
 
-    const currentCount = getKey2Count();
-    if (currentCount >= 240) {
-      setResult("Please call to Akhil Thadaka: 9121751697");
-      setIsSubmitting(false);
-      return;
-    }
-
-    const formData = new FormData(e.target);
-    formData.append("access_key", KEY_2);
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", CONTACT_CONFIG.accessKey2 || CONTACT_CONFIG.accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
       if (data.success) {
-        incrementKey2Count();
-        setResult("Form Submitted Successfully!");
+        setResult("Message sent successfully!");
         e.target.reset();
         setTimeout(() => {
           if (onSubmitSuccess) {
@@ -65,10 +30,10 @@ const HireForm = ({ onSubmitSuccess }) => {
           setResult("");
         }, 1500);
       } else {
-        setResult("Error submitting form. Please try again.");
+        setResult("Unable to send. Please try again.");
       }
-    } catch (error) {
-      setResult("Error submitting form. Please try again.");
+    } catch {
+      setResult("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -83,7 +48,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="text"
           name="name"
           placeholder="Your name or company"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         />
       </div>
@@ -95,7 +60,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="tel"
           name="phone"
           placeholder="e.g. +91 9999999999"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         />
       </div>
@@ -107,7 +72,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="email"
           name="email"
           placeholder="yourname@domain.com"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         />
       </div>
@@ -117,7 +82,7 @@ const HireForm = ({ onSubmitSuccess }) => {
         <label className="text-xs font-semibold text-gray-700">Requirement for Development *</label>
         <select
           name="requirement"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
           required
         >
           <option value="" disabled selected>Select a service requirement...</option>
@@ -141,7 +106,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="url"
           name="linkedin"
           placeholder="https://linkedin.com/in/username"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
         />
       </div>
 
@@ -151,7 +116,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="url"
           name="instagram"
           placeholder="https://instagram.com/username"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
         />
       </div>
 
@@ -161,7 +126,7 @@ const HireForm = ({ onSubmitSuccess }) => {
           type="url"
           name="website"
           placeholder="https://yourwebsite.com"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
         />
       </div>
 
@@ -172,14 +137,14 @@ const HireForm = ({ onSubmitSuccess }) => {
           name="note"
           placeholder="Briefly describe your timeline, features, budget, or other notes..."
           rows="3"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#c0ff00] focus:ring-2 focus:ring-[#c0ff00]/20 transition-all resize-none"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-black placeholder-gray-400 outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00]/20 transition-all resize-none"
         ></textarea>
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-1 w-full bg-[#111] hover:bg-[#c0ff00] text-white hover:text-black font-bold py-3.5 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-1 w-full bg-[#111] hover:bg-[#FF4D00] text-white hover:text-black font-bold py-3.5 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending..." : "Submit Inquiry"}
         {!isSubmitting && (
